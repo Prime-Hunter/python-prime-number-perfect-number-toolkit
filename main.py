@@ -1,29 +1,25 @@
 import core
 import numpy as np
+from tqdm import tqdm
 
 def main():
-    print("--- Goldbach Conjecture Scanner ---")
+    print("🚀 Goldbach Mega-Scanner")
     
-    # Get a limit from the user
-    try:
-        limit = int(input("Enter the limit to scan up to: "))
-    except ValueError:
-        print("Please enter a valid number.")
-        return
-
-    # Generate the sieve using our core module
-    print(f"Generating primes up to {limit:,}...")
+    limit = 100000  # Start with 100k to see it move!
     sieve = core.get_sieve(limit)
     
-    # Let's check the very last even number in your range
-    n = limit if limit % 2 == 0 else limit - 1
+    results = {}
     
-    # Quick math: find partitions for n
-    primes_to_check = np.where(sieve[:(n // 2) + 1])
-    count = np.sum(sieve[n - primes_to_check])
-    
-    print(f"\nResult for {n:,}:")
-    print(f"Found {count:,} unique prime pairs that sum to this number.")
+    # This loop uses the progress bar
+    for n in tqdm(range(4, limit + 1, 2), desc="Scanning Numbers"):
+        primes_to_check = np.where(sieve[:(n // 2) + 1])
+        count = np.sum(sieve[n - primes_to_check])
+        results[n] = count
+
+    # Find the "winner" (the number with the most pairs)
+    max_n = max(results, key=results.get)
+    print(f"\n✅ Peak Found: {max_n:,} has {results[max_n]:,} pairs!")
 
 if __name__ == "__main__":
     main()
+
