@@ -17,3 +17,7 @@ The **Goldbach Conjecture** is one of the oldest unsolved problems in math. It s
 1. Install dependencies: `pip install numpy pandas matplotlib tqdm`
 2. Run the scanner: `python main.py`
 3. Generate the plot: `python plot_comet.py`
+## 🛠️ Setup
+1. Clone the repo: `git clone https://github.com`
+2. Install all dependencies: `pip install -r requirements.txt`
+3. Run the scanner: `python main.py`
